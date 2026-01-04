@@ -13,14 +13,22 @@ class Fibonacci {
     int cached;
 
 public:
-    // TODO: 实现构造器
-    // Fibonacci()
+    // 实现无参构造器，初始化前两个基值并设置已缓存的索引
+    Fibonacci() {
+        cache[0] = 0;
+        cache[1] = 1;
+        cached = 1; // 表示已计算到索引 1
+        for (size_t k = 2; k < 16; ++k) cache[k] = 0;
+    }
 
-    // TODO: 实现正确的缓存优化斐波那契计算
+    // 按需计算并缓存斐波那契值
     size_t get(int i) {
-        for (; false; ++cached) {
-            cache[cached] = cache[cached - 1] + cache[cached - 2];
+        if (i < 0) return 0;
+        if ((size_t)i <= (size_t)cached) return cache[i];
+        for (int idx = cached + 1; idx <= i; ++idx) {
+            cache[idx] = cache[idx - 1] + cache[idx - 2];
         }
+        cached = i;
         return cache[i];
     }
 };

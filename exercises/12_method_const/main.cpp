@@ -4,8 +4,9 @@
 
 struct Fibonacci {
     int numbers[11];
-    // TODO: 修改方法签名和实现，使测试通过
-    int get(int i) {
+    // 修改为 constexpr const 成员函数以支持 constexpr 对象
+    constexpr int get(int i) const {
+        return numbers[i];
     }
 };
 

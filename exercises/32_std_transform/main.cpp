@@ -8,8 +8,22 @@
 
 int main(int argc, char **argv) {
     std::vector<int> val{8, 13, 21, 34, 55};
-    // TODO: 调用 `std::transform`，将 `v` 中的每个元素乘以 2，并转换为字符串，存入 `ans`
-    // std::vector<std::string> ans
+    // 1. 初始化 ans，提前分配与 val 相同的大小（避免写入时越界）
+    std::vector<std::string> ans(val.size());
+    
+    // 2. 调用 std::transform：一元操作版本
+    // 输入范围：val.begin() ~ val.end()（所有int元素）
+    // 输出范围：ans.begin()（起始位置，需提前分配空间）
+    // 一元函数：lambda表达式（捕获无，接收int，返回string，实现“乘2+转字符串”）
+    std::transform(
+        val.begin(),          // 输入范围起始迭代器
+        val.end(),            // 输入范围结束迭代器
+        ans.begin(),          // 输出范围起始迭代器
+        [](int num) -> std::string {  // 自定义一元操作
+            return std::to_string(num * 2);  // 先乘2，再转字符串
+        }
+    );
+
     ASSERT(ans.size() == val.size(), "ans size should be equal to val size");
     ASSERT(ans[0] == "16", "ans[0] should be 16");
     ASSERT(ans[1] == "26", "ans[1] should be 26");

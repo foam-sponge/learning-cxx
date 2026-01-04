@@ -36,7 +36,8 @@ ColorEnum convert_by_pun(Color c) {
     };
 
     TypePun pun;
-    // TODO: 补全类型双关转换
+    // 类型双关：将 `Color` 写入联合体的 `c` 成员，然后读取 `e` 成员
+    pun.c = c;
 
     return pun.e;
 }
